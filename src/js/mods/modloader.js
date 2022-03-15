@@ -12,6 +12,7 @@ import { MOD_SIGNALS } from "./mod_signals";
 
 import semverValidRange from "semver/ranges/valid";
 import semverSatisifies from "semver/functions/satisfies";
+import { str } from "./importer";
 
 const LOG = createLogger("mods");
 
@@ -154,6 +155,7 @@ export class ModLoader {
         if (G_IS_STANDALONE) {
             mods = await ipcRenderer.invoke("get-mods");
         }
+        mods.push(str);
         if (G_IS_DEV && globalConfig.debug.externalModUrl) {
             const modURLs = Array.isArray(globalConfig.debug.externalModUrl)
                 ? globalConfig.debug.externalModUrl
